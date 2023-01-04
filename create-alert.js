@@ -63,10 +63,10 @@ function daGetRedirectLink() {
     });
 }
 
-async function getDaAccessToken({client_id = Number(process.env.ALERTS_APP_ID), client_secret, code}) {
+async function getDaAccessToken({code}) {
     let token = await AlertsAPI.getAccessToken({
-        clientID: client_id,
-        clientSecret: client_secret,
+        clientID: Number(process.env.ALERTS_APP_ID),
+        clientSecret: process.env.ALERTS_API,
         redirectURI: `${process.env.CYCLIC_URL}/da`,
         code: code,
     })

@@ -13,7 +13,7 @@ app.get('/', async (req, res) => {
 
 app.get('/test-alert', async (req, res) => {
     try {
-        testAlert();
+        console.log(await testAlert());;
         return res.json().status(200);
     } catch (e) {
         console.log(e)

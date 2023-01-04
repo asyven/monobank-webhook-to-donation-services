@@ -2,7 +2,7 @@ const AlertsAPI = require('alerts-api')
 const {Monobank} = require('monobankua');
 
 const monoApi = new Monobank(process.env.MONO_TOKEN);
-let ALERTS_API_TOKEN = process.env.ALERTS_API
+let ALERTS_API_TOKEN = process.env.ALERTS_TOKEN
 
 /**
  * @typedef {Object} StatementItem
@@ -50,7 +50,7 @@ function registerMonoWebhook() {
 
 async function testAlert() {
     const donationAlerts = new AlertsAPI({access_token: ALERTS_API_TOKEN})
-    let myAlert = new AlertsAPI.CustomAlert({header: "test", message: "alert", is_shown: 1});
+    let myAlert = new AlertsAPI.CustomAlert({header: "0.00 UAH", message: "yes 🍕", is_shown: 0});
     console.log(await donationAlerts.sendCustomAlert(myAlert));
 }
 
@@ -70,7 +70,9 @@ async function getDaAccessToken({code}) {
         code: code,
     })
 
-    ALERTS_API_TOKEN = token.access_token;
+    if (typeof token.access_token !== "undefined") {
+        ALERTS_API_TOKEN = token.access_token;
+    }
 
     return token;
 }

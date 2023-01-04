@@ -46,7 +46,7 @@ async function monobankToDonationalerts(data) {
 
 
 function registerMonoWebhook() {
-    monoApi.set_webhook(process.env.CYCLIC_URL);
+    monoApi.set_webhook(`${process.env.CYCLIC_URL}/`);
 }
 
 async function testAlert() {

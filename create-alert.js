@@ -55,7 +55,7 @@ async function testAlert() {
     console.log(await donationAlerts.sendCustomAlert(myAlert));
 }
 
-async function daGetRedirectLink() {
+function daGetRedirectLink() {
     return AlertsAPI.generateOauthLink({
         clientID: Number(process.env.ALERTS_APP_ID),
         redirectURI: `${process.env.CYCLIC_URL}/da`,

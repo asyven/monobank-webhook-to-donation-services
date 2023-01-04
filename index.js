@@ -1,5 +1,11 @@
 const express = require('express')
-const {monobankToDonationalerts, registerMonoWebhook, testAlert, daGetRedirectLink, getDaAccessToken} = require("./create-alert");
+const {
+    monobankToDonationalerts,
+    registerMonoWebhook,
+    testAlert,
+    daGetRedirectLink,
+    getDaAccessToken
+} = require("./create-alert");
 const app = express()
 
 app.get('/', async (req, res) => {
@@ -22,7 +28,8 @@ app.get('/test-alert', async (req, res) => {
 
 app.get('/da-login', async (req, res) => {
     try {
-       res.redirect(daGetRedirectLink());
+        console.log(daGetRedirectLink());
+        res.redirect(daGetRedirectLink());
     } catch (e) {
         console.log(e)
     }

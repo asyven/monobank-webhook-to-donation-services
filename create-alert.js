@@ -63,8 +63,8 @@ function daGetRedirectLink() {
     });
 }
 
-async function getDaAccessToken({client_id, client_secret,code}) {
-   let token = await AlertsAPI.getAccessToken({
+async function getDaAccessToken({client_id = Number(process.env.ALERTS_APP_ID), client_secret, code}) {
+    let token = await AlertsAPI.getAccessToken({
         clientID: client_id,
         clientSecret: client_secret,
         redirectURI: `${process.env.CYCLIC_URL}/da`,
@@ -72,9 +72,9 @@ async function getDaAccessToken({client_id, client_secret,code}) {
     })
 
     ALERTS_API_TOKEN = token.access_token;
-    
+
     return token;
 }
 
-module.exports = {monobankToDonationalerts, registerMonoWebhook, testAlert, daGetRedirectLink,getDaAccessToken}
+module.exports = {monobankToDonationalerts, registerMonoWebhook, testAlert, daGetRedirectLink, getDaAccessToken}
         

@@ -39,7 +39,7 @@ async function monobankToDonationalerts(data) {
         let myAlert = new AlertsAPI.CustomAlert({header, message, is_shown: 1});
         console.log(await donationAlerts.sendCustomAlert(myAlert));
     } catch (e) {
-        console.error(e);
+        console.log(e);
     }
 }
 

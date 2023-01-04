@@ -22,7 +22,7 @@ app.get('/test-alert', async (req, res) => {
 
 app.get('/da-login', async (req, res) => {
     try {
-        return res.redirect(daGetRedirectLink());
+       res.redirect(daGetRedirectLink());
     } catch (e) {
         console.log(e)
     }

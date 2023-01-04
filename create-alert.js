@@ -1,8 +1,8 @@
 const AlertsAPI = require('alerts-api')
 const {Monobank} = require('monobankua');
 
-const donationAlerts = new AlertsAPI({access_token: process.env.ALERTS_API})
 const monoApi = new Monobank(process.env.MONO_TOKEN);
+let ALERTS_API_TOKEN = process.env.ALERTS_API
 
 /**
  * @typedef {Object} StatementItem
@@ -32,6 +32,8 @@ const monoApi = new Monobank(process.env.MONO_TOKEN);
 
 async function monobankToDonationalerts(data) {
     try {
+        const donationAlerts = new AlertsAPI({access_token: ALERTS_API_TOKEN})
+
         let header = `${data.description} - ${(data.amount / 100).toFixed(2)} UAH`;
         let message = `${data.comment}`;
         let myAlert = new AlertsAPI.CustomAlert({header, message, is_shown: 1});
@@ -48,9 +50,31 @@ function registerMonoWebhook() {
 }
 
 async function testAlert() {
+    const donationAlerts = new AlertsAPI({access_token: ALERTS_API_TOKEN})
     let myAlert = new AlertsAPI.CustomAlert({header: "test", message: "alert", is_shown: 1});
     console.log(await donationAlerts.sendCustomAlert(myAlert));
 }
 
-module.exports = {monobankToDonationalerts, registerMonoWebhook, testAlert}
+async function daGetRedirectLink() {
+    return new AlertsAPI.generateOauthLink({
+        clientID: Number(process.env.ALERTS_APP_ID),
+        redirectURI: `${process.env.CYCLIC_URL}/da`,
+        scopes: ['oauth-custom_alert-store'],
+    });
+}
+
+async function getDaAccessToken({client_id, client_secret,code}) {
+   let token = await AlertsAPI.getAccessToken({
+        clientID: client_id,
+        clientSecret: client_secret,
+        redirectURI: `${process.env.CYCLIC_URL}/da`,
+        code: code,
+    })
+
+    ALERTS_API_TOKEN = token.access_token;
+    
+    return token;
+}
+
+module.exports = {monobankToDonationalerts, registerMonoWebhook, testAlert, daGetRedirectLink,getDaAccessToken}
         

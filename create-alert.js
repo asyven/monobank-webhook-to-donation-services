@@ -56,7 +56,7 @@ async function testAlert() {
 }
 
 async function daGetRedirectLink() {
-    return new AlertsAPI.generateOauthLink({
+    return AlertsAPI.generateOauthLink({
         clientID: Number(process.env.ALERTS_APP_ID),
         redirectURI: `${process.env.CYCLIC_URL}/da`,
         scopes: ['oauth-custom_alert-store'],

@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "alerts-api": "^1.0.6",
+    "express": "^4.17.1",
+    "monobankua": "^1.0.4"
   }
 }

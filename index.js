@@ -6,7 +6,9 @@ const {
     daGetRedirectLink,
     getDaAccessToken
 } = require("./create-alert");
-const app = express()
+const app = express();
+
+app.use(express.json());
 
 app.get('/', async (req, res) => {
     try {

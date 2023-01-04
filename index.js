@@ -1,9 +1,9 @@
 const express = require('express')
 const app = express()
 
-app.post('/', (req, res) => {
+app.all('/', (req, res) => {
     try {
-        console.log(req.body)
+        console.log(req.body, process.env)
         return res.json().status(200);
     } catch (e) {
         console.log(e)

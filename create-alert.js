@@ -36,7 +36,7 @@ async function monobankToDonationalerts(data) {
 
         let header = `${data.description} - ${(data.amount / 100).toFixed(2)} UAH`;
         let message = `${data.comment}`;
-        let myAlert = new AlertsAPI.CustomAlert({header, message, is_shown: 1});
+        let myAlert = new AlertsAPI.CustomAlert({header, message, is_shown: 0});
         console.log(await donationAlerts.sendCustomAlert(myAlert));
     } catch (e) {
         console.log(e);

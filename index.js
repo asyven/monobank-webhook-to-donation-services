@@ -36,7 +36,7 @@ app.get('/da-login', async (req, res) => {
 })
 app.get('/da', async (req, res) => {
     try {
-        console.log(await getDaAccessToken(req.body));
+        console.log(await getDaAccessToken(req.query));
         return res.json().status(200);
     } catch (e) {
         console.log(e)

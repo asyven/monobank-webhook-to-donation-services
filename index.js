@@ -45,8 +45,11 @@ app.get('/da', async (req, res) => {
 
 app.all('/mono', async (req, res) => {
     try {
-        console.log(req.body);
-        await monobankToDonationalerts(req.body.data);
+        try {
+            console.log(req.body, req.query)
+            await monobankToDonationalerts(req.body.data);
+        }catch (e){
+        }
         return res.json().status(200);
     } catch (e) {
         console.log(e)

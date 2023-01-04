@@ -46,7 +46,9 @@ app.get('/da', async (req, res) => {
 app.post('/mono', async (req, res) => {
     try {
         try {
-            console.log("??", req.body.data)
+            console.log("sasad")
+            console.log(req.body)
+            console.log(req.body.json())
             await monobankToDonationalerts(req.body.data);
         }catch (e){
         }

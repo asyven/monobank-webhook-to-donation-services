@@ -32,19 +32,25 @@ const monoApi = new Monobank(process.env.MONO_TOKEN);
 
 async function monobankToDonationalerts(data) {
     try {
-        let header = `${data.description} - ${(data.amount/100).toFixed(2)} UAH`;
+        let header = `${data.description} - ${(data.amount / 100).toFixed(2)} UAH`;
         let message = `${data.comment}`;
         let myAlert = new AlertsAPI.CustomAlert({header, message, is_shown: 1});
-        await donationAlerts.sendCustomAlert(myAlert);
+        console.log(await donationAlerts.sendCustomAlert(myAlert));
+        ;
     } catch (e) {
         console.error(e);
     }
 }
 
 
-function registerMonoWebhook(){
+function registerMonoWebhook() {
     monoApi.set_webhook(process.env.CYCLIC_URL);
 }
 
-module.exports = {monobankToDonationalerts,registerMonoWebhook}
+async function testAlert() {
+    let myAlert = new AlertsAPI.CustomAlert({header: "test", message: "alert", is_shown: 1});
+    console.log(await donationAlerts.sendCustomAlert(myAlert));
+}
+
+module.exports = {monobankToDonationalerts, registerMonoWebhook, testAlert}
         

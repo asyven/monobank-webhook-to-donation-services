@@ -32,10 +32,13 @@ let ALERTS_API_TOKEN = process.env.ALERTS_TOKEN
 
 async function monobankToDonationalerts(data) {
     try {
+        if (!data.amount || data.amount < 100){
+            return;
+        }
         const donationAlerts = new AlertsAPI({access_token: ALERTS_API_TOKEN})
 
-        let header = `${data.description} - ${(data.amount / 100).toFixed(2)} UAH`;
-        let message = `${data.comment}`;
+        let header = `${data.description || "Anonymous"} - ${(data.amount / 100).toFixed(2)} UAH`;
+        let message = `${data.comment || ""}`;
         let myAlert = new AlertsAPI.CustomAlert({header, message, is_shown: 0});
         console.log(await donationAlerts.sendCustomAlert(myAlert));
     } catch (e) {
